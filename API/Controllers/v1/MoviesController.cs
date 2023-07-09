@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    [ApiVersion("1.0")]
     public class MoviesController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
@@ -17,6 +18,7 @@ namespace API.Controllers
             _db = db;
         }
 
+        [MapToApiVersion("1.0")]
         [HttpGet("GetAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -34,6 +36,7 @@ namespace API.Controllers
             }
         }
 
+        [MapToApiVersion("1.0")]
         [HttpPost("Create")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
