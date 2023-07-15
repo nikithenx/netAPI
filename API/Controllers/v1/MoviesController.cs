@@ -38,7 +38,7 @@ namespace API.Controllers
 
         [MapToApiVersion("1.0")]
         [HttpPost("Create")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] MovieCreateDto createDto)
         {

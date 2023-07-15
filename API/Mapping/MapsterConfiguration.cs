@@ -12,6 +12,9 @@ namespace API.Mapping
         {
             TypeAdapterConfig<Movie, MovieDto>.NewConfig();
             TypeAdapterConfig<MovieCreateDto, Movie>.NewConfig();
+            TypeAdapterConfig<MovieUpdateDto, Movie>.NewConfig();
+            TypeAdapterConfig<MovieHallCreateDto, MovieHall>.NewConfig();
+            TypeAdapterConfig<MovieHallUpdateDto, MovieHall>.NewConfig();
             TypeAdapterConfig<MovieHall, MovieHallReadOnlyDto>.NewConfig();
             TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
         }
