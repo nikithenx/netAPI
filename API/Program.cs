@@ -18,6 +18,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)
     )
 );
+builder.Services.AddSingleton<DapperContext>();
 
 builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
 {
