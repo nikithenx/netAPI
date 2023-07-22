@@ -24,18 +24,10 @@ namespace API.Controllers.v2
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
         {
-            try 
-            {
-                var query = "SELECT * FROM Movies";
-                using var connection = _db.CreateConnection();
-                var movies = await connection.QueryAsync<Movie>(query);
-                return Ok(movies);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in {nameof(GetAll)}: {ex.Message}");
-                return BadRequest();
-            }
+            var query = "SELECT * FROM Movies";
+            using var connection = _db.CreateConnection();
+            var movies = await connection.QueryAsync<Movie>(query);
+            return Ok(movies);
         }
 
         [MapToApiVersion("2.0")]
@@ -44,18 +36,10 @@ namespace API.Controllers.v2
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Create([FromBody] MovieCreateDto createDto)
         {
-            try 
-            {
-                var query = "Insert into Movies (Title, Genre, DurationInMinutes, Revenue) Values (@Title, @Genre, @DurationInMinutes, @Revenue)";
-                using var connection = _db.CreateConnection();
-                _ = await connection.ExecuteAsync(query, createDto);
-                return Created(nameof(Create), createDto);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error in {nameof(Create)}: {ex.Message}");
-                return BadRequest();
-            }
+            var query = "Insert into Movies (Title, Genre, DurationInMinutes, Revenue) Values (@Title, @Genre, @DurationInMinutes, @Revenue)";
+            using var connection = _db.CreateConnection();
+            _ = await connection.ExecuteAsync(query, createDto);
+            return Created(nameof(Create), createDto);
         }
     }
 }

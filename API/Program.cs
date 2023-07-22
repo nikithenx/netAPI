@@ -1,4 +1,5 @@
 using API;
+using API.ExceptionHandling;
 using API.Mapping;
 using API.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -53,6 +54,8 @@ app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 
