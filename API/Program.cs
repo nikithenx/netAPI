@@ -1,6 +1,7 @@
 using API;
 using API.ExceptionHandling;
 using API.Mapping;
+using API.RateLimiting;
 using API.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ builder.Services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
            .AllowAnyMethod()
            .AllowAnyHeader();
 }));
+
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
@@ -56,6 +59,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseMiddleware<ExceptionMiddleware>();
+app.UseMiddleware<RateLimitingMiddleware>();
+
+app.UseRateLimiter();
 
 app.MapControllers();
 

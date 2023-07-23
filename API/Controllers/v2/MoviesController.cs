@@ -1,5 +1,6 @@
 using API.DTOs.MovieDTOs;
 using API.Entities;
+using API.RateLimiting;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,7 @@ namespace API.Controllers.v2
 
         [MapToApiVersion("2.0")]
         [HttpGet("GetAll")]
+        [LimitRequests(MaxRequests = 1, Window = 1)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetAll()
