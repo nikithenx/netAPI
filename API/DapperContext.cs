@@ -1,17 +1,17 @@
 using System.Data;
+using API.Options;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Options;
 
 namespace API
 {
     public class DapperContext
     {
-        private readonly IConfiguration _configuration;
         private readonly string _connectionString;
 
-        public DapperContext(IConfiguration configuration)
+        public DapperContext(IOptions<DatabaseConnectionOptions> options)
         {
-            _configuration = configuration;
-            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+            _connectionString = options.Value.DefaultConnection;
         }
         
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);

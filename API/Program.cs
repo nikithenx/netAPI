@@ -1,6 +1,7 @@
 using API;
 using API.ExceptionHandling;
 using API.Mapping;
+using API.Options;
 using API.RateLimiting;
 using API.Versioning;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.RegisterMapsterConfiguration();
 builder.Services.ConfigureVersioning();
+builder.Services.ConfigureOptionServices(builder.Configuration);
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options => options.UseSqlServer(
